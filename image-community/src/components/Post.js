@@ -1,21 +1,28 @@
 import React from "react";
+//컴포넌트 임포트
+import Grid from "./Grid";
 
 
 // 사용자 이미지 , 유저 네임, 작성시간, 수정 버튼, 게시글 이미지, 게시글 텍스트, 게시글 댓글
 // 유저 정보 + 게시글 정보
 // 수정은 내 정보에 가깝다.
 
+//2021.10.01 1-10 강의
+// text , image가 들어 가야 한다.
+
 const Post = (props) => {
 
 
-
+//Grid 안에 묶어 줘야 한다.
 
     return (
       <React.Fragment>
-        <div>user profile / user name / inser_dt / is_me (edit btn)</div>
-        <div>contents</div>
-        <div>image</div>
-        <div>comment cnt</div>
+        <Grid padding = "16px">
+          <div>user profile / user name / inser_dt </div>
+          <div>contents</div>
+          <div>image</div>
+          <div>comment cnt</div>
+        </Grid>
       </React.Fragment>
     )
 }

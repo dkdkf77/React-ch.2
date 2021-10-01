@@ -5,6 +5,10 @@ import './App.css';
 import {BrowserRouter, Route} from "react-router-dom"
 //component import
 import PostList from "../pages/PostList";
+import Login from "../pages/Login";
+import Header from "../components/Header";
+import Grid from "../elements/Grid";
+import Signup from "../pages/Signup";
 
 
 function App() {
@@ -16,11 +20,14 @@ function App() {
   
     //PostList로 라우팅 하기 , exact = 같은 항목 빼기  , component = {PostList}, import 하기
     <React.Fragment>
-      
-      <BrowserRouter>
-        <Route pate ="/" exact component={PostList} / >
-        
-      </BrowserRouter>
+      <Grid>
+        <Header></Header>
+        <BrowserRouter>
+          <Route path ="/" exact component={PostList}/>
+          <Route path ="/login" exact component={Login}/>
+          <Route path = "/signup" exact component={Signup}/>
+        </BrowserRouter>
+      </Grid>
     </React.Fragment>
   );
 }

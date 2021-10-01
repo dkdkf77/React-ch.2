@@ -2,7 +2,8 @@ import React from "react";
 //컴포넌트 임포트
 
 // 모아서 여러줄의 임포트를 하나로 줄일수 있다. 
-import {Grid, Image, Text} from "../elements"
+import {Grid, Image, Text, Input} from "../elements"
+
 
 
 // 사용자 이미지 , 유저 네임, 작성시간, 수정 버튼, 게시글 이미지, 게시글 텍스트, 게시글 댓글

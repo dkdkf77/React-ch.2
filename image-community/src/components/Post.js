@@ -1,6 +1,8 @@
 import React from "react";
 //컴포넌트 임포트
-import Grid from "./Grid";
+
+// 모아서 여러줄의 임포트를 하나로 줄일수 있다. 
+import {Grid, Image, Text} from "../elements"
 
 
 // 사용자 이미지 , 유저 네임, 작성시간, 수정 버튼, 게시글 이미지, 게시글 텍스트, 게시글 댓글
@@ -14,14 +16,25 @@ const Post = (props) => {
 
 
 //Grid 안에 묶어 줘야 한다.
+// 1번째 Grid에 이미지가 들어 가야 한다.
 
     return (
       <React.Fragment>
-        <Grid padding = "16px">
-          <div>user profile / user name / inser_dt </div>
-          <div>contents</div>
-          <div>image</div>
-          <div>comment cnt</div>
+        <Grid>
+          <Grid is_flex>
+            <Image shape="circle" src={props.src}/>
+            <Text bold>{props.user_info.user_name}</Text>
+            <Text>{props.insert_dt}</Text>
+          </Grid>
+          <Grid padding = "16px">
+            <Text>{props.contents}</Text>
+          </Grid>
+          <Grid>
+            <Image shape="rectangle" src={props.src}/>
+          </Grid>
+          <Grid padding = "16px">
+            <Text bold>댓글{props.comment_cnt}개</Text>
+          </Grid>   
         </Grid>
       </React.Fragment>
     )
@@ -38,10 +51,10 @@ Post.defaultProps = {
   // 유저 네임, 유저 프로필
   user_info : {
     user_name : "SeungHwan",
-    user_profile: "https://i1.wp.com/rubyweb.kr/wp-content/uploads/2019/04/iutjiptotolo.png?fit=735%2C456",
+    user_profile: "https://media.istockphoto.com/vectors/background-illustration-in-the-sea-vector-id1236656435?k=20&m=1236656435&s=170667a&w=0&h=mNvfyUQDQ1wU3iVQRcUZnzXDpMfUcFOV1lFvXF8tk1U=",
   },
   //게시글에 들어가는 이미지
-  image_url: "https://i1.wp.com/rubyweb.kr/wp-content/uploads/2019/04/iutjiptotolo.png?fit=735%2C456",
+  image_url: "https://media.istockphoto.com/vectors/background-illustration-in-the-sea-vector-id1236656435?k=20&m=1236656435&s=170667a&w=0&h=mNvfyUQDQ1wU3iVQRcUZnzXDpMfUcFOV1lFvXF8tk1U=",
   // 댓글
   contents : "고양이네요",
   // 댓글 갯수

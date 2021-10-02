@@ -1,8 +1,16 @@
 import React from "react";
 import {Text, Input, Grid, Button} from "../elements";
+import {getCookie, setCookie, deleteCookie} from "../shared/Cookie"
 
 const Login = (props) => {
   // 로그인 페이지 콤포넌트 
+  // setCookie 설정 만료일 3일로 user id = perl 이고 pwd = pppp 이다.
+  console.log(getCookie('user_id'));
+  const login = () => {
+
+    setCookie("user_id", "perl", 3);
+    setCookie("user_pwd", "pppp", 3);
+  }
   return(
     <React.Fragment>
       <Grid padding="16px">
@@ -26,8 +34,10 @@ const Login = (props) => {
             console.log("비밀번호 입력 완료!")
           }}/>
         </Grid>
-
-        <Button text = "로그인 하기" _onClick={() => console.log('로그인 했어')} ></Button>
+        <Button text = "로그인 하기" _onClick={() => {
+          console.log('로그인 했어');
+          deleteCookie("user_id");
+          }}></Button>
       </Grid>
 
     </React.Fragment>

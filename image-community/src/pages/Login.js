@@ -2,15 +2,19 @@ import React from "react";
 import {Text, Input, Grid, Button} from "../elements";
 import {getCookie, setCookie, deleteCookie} from "../shared/Cookie"
 
+import {useDispatch} from "react-redux"
+// as 하면 별명 주기
+import {actionCreators as userActions} from "../redux/modules/user";
+
 const Login = (props) => {
   // 로그인 페이지 콤포넌트 
   // setCookie 설정 만료일 3일로 user id = perl 이고 pwd = pppp 이다.
-  console.log(getCookie('user_id'));
-  const login = () => {
+  const dispatch = useDispatch();
 
-    setCookie("user_id", "perl", 3);
-    setCookie("user_pwd", "pppp", 3);
-  }
+  const login = () => {
+    dispatch(userActions.loginAction({user_name: 'perl'}));
+  };
+
   return(
     <React.Fragment>
       <Grid padding="16px">

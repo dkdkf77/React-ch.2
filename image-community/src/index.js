@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './shared/App';
 import reportWebVitals from './reportWebVitals';
+import {Provider} from "react-redux";
+//store 주입 
+import store from "./redux/configureStore"
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // store ={sotre} 스토어 주입
+  <Provider store={store}> 
+    <App/>
+  </Provider>,
   document.getElementById('root')
 );
 

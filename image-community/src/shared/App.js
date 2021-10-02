@@ -2,7 +2,10 @@ import React from "react"
 import './App.css';
 
 //router 
-import {BrowserRouter, Route} from "react-router-dom"
+import {BrowserRouter, Route} from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import {history} from "../redux/configureStore";
+
 //component import
 import PostList from "../pages/PostList";
 import Login from "../pages/Login";
@@ -24,14 +27,15 @@ function App() {
 
   
     //PostList로 라우팅 하기 , exact = 같은 항목 빼기  , component = {PostList}, import 하기
+    //브라우저라우터 -> 커넥티드라우터 그리고 히스토리 주기
     <React.Fragment>
       <Grid>
         <Header></Header>
-        <BrowserRouter>
+        <ConnectedRouter history ={history}> 
           <Route path ="/" exact component={PostList}/>
           <Route path ="/login" exact component={Login}/>
           <Route path = "/signup" exact component={Signup}/>
-        </BrowserRouter>
+        </ConnectedRouter>
       </Grid>
     </React.Fragment>
   );

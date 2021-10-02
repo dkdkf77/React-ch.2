@@ -58,8 +58,15 @@ const getUser = createAction(GET_USER, (user) => ({
 const initialState = {
   user: null,
   is_login: false,
-
 };
+// middleware actions
+const loginAction = (user) => {
+  return function (dispatch, getState, {history}) {
+    console.log(history)
+    dispatch(logIn(user));
+    history.push('/');
+  }
+}
 
 //reducer
 //immer를 여기다 써준다 
@@ -69,10 +76,14 @@ export default handleActions({
   [LOG_IN]: (state, action) => produce(state, (draft)=>{
     setCookie("is_login","success");
     draft.user = action.payload.user; //payload에 우리가 준 정보가 담긴다.
-    draft.is_login = true;
+    draft.is_login = true; // 로그인 버튼을 누르면 정보를 가져와서 바꿔줌
     
   }),
-  [LOG_OUT]: (state, action) => produce(state, (draft)=>{}),
+  [LOG_OUT]: (state, action) => produce(state, (draft)=>{
+    deleteCookie("is_login");
+    draft.user = null;
+    draft.is_login = false; // logout을 누르면 다시 초기 상태로 만듬
+  }),
   [GET_USER]: (state, action) => produce(state, (draft)=>{}),
   
   }, 
@@ -85,6 +96,7 @@ const actionCreators = {
   logIn,
   logOut,
   getUser,
+  loginAction,
 }
 
 export { actionCreators };

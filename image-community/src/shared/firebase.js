@@ -1,6 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
+
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDDwTp-iHgvWiqYXQgjwUw_sI5hhHo8mfI",
   authDomain: "imagecommunity-6e8bf.firebaseapp.com",
@@ -14,6 +17,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // 파이어 베이스 가져와서 사용
+const apiKey = firebaseConfig.apiKey;
 const auth = firebase.auth();
 
-export{auth};
+export{auth, apiKey};

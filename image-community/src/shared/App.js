@@ -10,8 +10,13 @@ import {history} from "../redux/configureStore";
 import PostList from "../pages/PostList";
 import Login from "../pages/Login";
 import Header from "../components/Header";
-import Grid from "../elements/Grid";
+import {Grid, Button} from "../elements";
 import Signup from "../pages/Signup";
+import Permit from "./permit";
+
+import {actionCreators as userActions} from "../redux/modules/user";
+import {useDispatch} from "react-redux";
+import { apiKey } from "./firebase";
 
 
 //yarn add redux react-redux redux-thunk redux-logger history@4.10.1 connected-react-router@6.8.0
@@ -20,6 +25,17 @@ import Signup from "../pages/Signup";
 //자동화 해서 편하게 만들어 주는 리덕스 액션
 
 function App() {
+  const dispatch = useDispatch();
+
+  const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const is_session = sessionStorage.getItem(_session_Key)? true: false;
+
+  React.useEffect(() => {
+    if(is_session) {
+      dispatch(userActions.loginCheckFB);
+    }
+
+  },[]);
   return (
     //App.js 필요없는 파일 없애고 넣기
     // shared로 App.css 파일과 App.js 파일 옮기기
@@ -37,6 +53,9 @@ function App() {
           <Route path = "/signup" exact component={Signup}/>
         </ConnectedRouter>
       </Grid>
+      <Permit>
+        <Button is_float text="+"></Button>
+      </Permit>
     </React.Fragment>
   );
 }

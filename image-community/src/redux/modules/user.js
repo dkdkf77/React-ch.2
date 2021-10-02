@@ -7,12 +7,12 @@ import {setCookie, getCookie, deleteCookie} from "../../shared/Cookie";
 
 // firebase export
 import {auth} from "../../shared/firebase";
-import _ from "lodash";
+import firebase from "firebase/app";
 
 // 액션생성 함수를 만들어야 액션 객체를 만들어서 쓸수 있다.
 
 // actions
-const LOG_IN = "LOG_IN";
+
 const LOG_OUT = "LOG_OUT";
 const GET_USER = "GET_USER";
 const SET_USER =  "SET_USER";
@@ -63,13 +63,35 @@ const user_initial = {
 }
 
 // middleware actions
-const loginAction = (user) => {
-  return function (dispatch, getState, {history}) {
-    console.log(history)
-    dispatch(setUser(user));
-    history.push('/');
-  };
-};
+const loginFb = (id, pwd) => {
+  return function (dispatch, getState, {history}){
+  
+  auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then((res) => {
+    auth
+    .signInWithEmailAndPassword(id, pwd)
+    .then((user) => {
+     console.log(user);
+     
+    dispatch(setUser({
+    user_name: user.user.displayName, 
+    id: id, 
+    user_profile: '',
+    uid: user.user.uid,
+   })
+  );
+
+  history.push("/");
+  })
+  
+    .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+
+    console.log(errorCode, errorMessage);
+    });
+  });
+ }
+}
 
 const signupFB = (id, pwd, user_name) => {
   return function (dispatch, getState, {history}){
@@ -84,7 +106,12 @@ const signupFB = (id, pwd, user_name) => {
     auth.currentUser.updateProfile({
       displayName: user_name,
     }).then(()=>{
-      dispatch(setUser({user_name: user_name, id: id, user_profile: ''}));
+      dispatch(setUser({user_name: user.user.displayName, 
+      id: id, 
+      user_profile: '',
+      uid : user.user.uid,
+      })
+    );
       history.push('/');
     }).catch((error)=>{
       console.log(error);
@@ -102,6 +129,33 @@ const signupFB = (id, pwd, user_name) => {
     });
   }
 }
+const loginCheckFB = () => {
+  return function (dispatch, getState, {history}){
+    auth.onAuthStateChanged((user) => {
+      if(user){
+        dispatch(setUser({
+          user_name: user.displayName,
+          user_profile: '',
+          id: user.email,
+          uid: user.uid,
+        })
+       );
+      }else{
+        dispatch(logOut());
+      }
+    })
+  }
+}
+
+const logoutFB = () => {
+  return function (dispatch, getState, {history}){
+    auth.signOut().then(() => {
+      dispatch(logOut());
+      history.replace('/');
+    })
+  }
+}
+
 //reducer
 //immer를 여기다 써준다 
 // produce 쓰는 방법 state, 원본 값을 받아 온다 .
@@ -129,8 +183,10 @@ export default handleActions({
 const actionCreators = {
   logOut,
   getUser,
-  loginAction,
   signupFB,
+  loginFb,
+  loginCheckFB,
+  logoutFB,
 }
 
 export { actionCreators };

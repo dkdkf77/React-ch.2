@@ -36,7 +36,7 @@ const Login = (props) => {
         </Grid>
         <Button text = "로그인 하기" _onClick={() => {
           console.log('로그인 했어');
-          deleteCookie("user_id");
+          login();
           }}></Button>
       </Grid>
 

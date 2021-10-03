@@ -1,0 +1,10 @@
+{
+ "editor.tabSize": 2,
+ "editor.insertSpaces": false,
+ "workbench.iconTheme": "material-icon-theme",
+ "prettier.singleQuote": true,
+ "editor.defaultFormatter": "esbenp.prettier-vscode",
+ "[javascript]": {
+   "editor.defaultFormatter": "esbenp.prettier-vscode"
+ }
+}

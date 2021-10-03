@@ -13,7 +13,10 @@ import Header from "../components/Header";
 import {Grid, Button} from "../elements";
 import Signup from "../pages/Signup";
 import Permit from "./permit";
+import PostWrite from "../pages/PostWrite";
+import PostDetail from "../pages/PostDetail";
 
+//리덕스, 파이어 베이스
 import {actionCreators as userActions} from "../redux/modules/user";
 import {useDispatch} from "react-redux";
 import { apiKey } from "./firebase";
@@ -51,6 +54,8 @@ function App() {
           <Route path ="/" exact component={PostList}/>
           <Route path ="/login" exact component={Login}/>
           <Route path = "/signup" exact component={Signup}/>
+          <Route path = "/write" exact component={PostWrite}/>
+          <Route path = "/post/:id" exact component={PostDetail}/>
         </ConnectedRouter>
       </Grid>
       <Permit>

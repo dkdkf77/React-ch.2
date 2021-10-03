@@ -1,5 +1,10 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import dotenv from 'dotenv'
+dotenv.config()
+
+console.log(process.env.REACT_APP_PORT) // 3000;
+console.log(process.env.REACT_APP_USER) // POWELLSTREET;
 
 
 

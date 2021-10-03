@@ -3,36 +3,45 @@ import styled from "styled-components";
 
 const Button = (props) => {
 // 무한 루프 현상 = 로딩창이 계속 로딩이 안되고 무한으로 돌고 있다.
-  const {text, _onClick, is_float } = props;
+  const {text, _onClick, is_float, children, margin, width } = props;
   
   if(is_float){
     return (
       <React.Fragment>
-        <FloatButton></FloatButton>
+        <FloatButton oncClick = {_onClick}>{text? text : children}</FloatButton>
       </React.Fragment>
     )
   }
+
+  const styles = {
+    margin : margin,
+    width : width,
+  };
   return(
     <React.Fragment>
-      <ElButton onClick={_onClick}>{text}</ElButton>
+      <ElButton onClick={_onClick}>{text ? text: children}</ElButton>
     </React.Fragment>
   );
 }
 
 Button.defaultProps ={
-  text : "텍스트",
+  text : false,
+  children : null,
   _onClick : () => {},
   is_float: false,
-}
+  margin: false,
+  width: '100%',
+};
 
 // 버튼 스타일 주기 
 const ElButton = styled.button`
-  width: 100%;
+  width: 100%; ${(props) => props.width}
   background-color : #212121;
   color: #ffffff;
   padding : 12px 0px;
   box-sizing: border-box;
   border: none;
+  ${(props) => (props.margin? `margin: ${props.margin};` : '')}
 `;
 
 const FloatButton = styled.button`

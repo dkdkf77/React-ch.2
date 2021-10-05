@@ -1,5 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
+import "firebase/storage";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -24,5 +26,9 @@ firebase.initializeApp(firebaseConfig);
 // 파이어 베이스 가져와서 사용
 const apiKey = firebaseConfig.apiKey;
 const auth = firebase.auth();
+const firestore = firebase.firestore();
+const storage = firebase.storage();
 
-export{auth, apiKey};
+
+
+export{auth, apiKey, firestore, storage};

@@ -15,6 +15,7 @@ import Signup from "../pages/Signup";
 import Permit from "./permit";
 import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
+import Search from "./Search";
 
 //리덕스, 파이어 베이스
 import {actionCreators as userActions} from "../redux/modules/user";
@@ -56,10 +57,11 @@ function App() {
           <Route path = "/signup" exact component={Signup}/>
           <Route path = "/write" exact component={PostWrite}/>
           <Route path = "/post/:id" exact component={PostDetail}/>
+          <Route path = "/search" exact component={Search}/> 
         </ConnectedRouter>
       </Grid>
       <Permit>
-        <Button is_float text="+"></Button>
+        <Button is_float text="+" _onClick = {() =>{history.push("/write");}}></Button>
       </Permit>
     </React.Fragment>
   );

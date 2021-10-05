@@ -6,7 +6,7 @@ import styled from "styled-components";
 // Grid 컴포넌트 만들어 주기 
 
 const Grid = (props) => {
-  const {is_flex, width, margin, padding, bg , children} = props;
+  const {is_flex, width, margin, padding, bg , children, center} = props;
 // Grid는 바깥을 감싸는 것이라  내부는 children에서 받아 오는 것이다.
 
   const styles = {
@@ -15,6 +15,7 @@ const Grid = (props) => {
     margin : margin,
     padding : padding,
     bg : bg,
+    center: center,
   };
 
 
@@ -35,6 +36,7 @@ Grid.defaultProps = {
   padding: false,
   margin: false,
   bg: false,
+  center: false,
 }
 
 // 스타일 컴퍼넌트 사용 => 
@@ -50,6 +52,7 @@ const GridBox = styled.div`
     ${(props) => 
     (props.is_flex? `display: flex; aligh-items: center; justify-content : space-between 
     ` : "")} 
+    ${(props) => props.center? `text-align: center`: ""}
     
 `;
 

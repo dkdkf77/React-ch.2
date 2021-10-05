@@ -2,33 +2,22 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
-import dotenv from 'dotenv'
-dotenv.config()
-
-console.log(process.env.REACT_APP_PORT) // 3000;
-console.log(process.env.REACT_APP_USER) // POWELLSTREET;
-
-
-
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDDwTp-iHgvWiqYXQgjwUw_sI5hhHo8mfI",
-  authDomain: "imagecommunity-6e8bf.firebaseapp.com",
-  projectId: "imagecommunity-6e8bf",
-  storageBucket: "imagecommunity-6e8bf.appspot.com",
-  messagingSenderId: "136151953598",
-  appId: "1:136151953598:web:97e2616b5a804e9bc3aeef",
-  measurementId: "G-7H7JFS4HXL"
+  apiKey: "AIzaSyA0olm-KRlbI4Efq4zi9R1syqDL2xReJsE",
+  authDomain: "image-community-244f6.firebaseapp.com",
+  projectId: "image-community-244f6",
+  storageBucket: "image-community-244f6.appspot.com",
+  messagingSenderId: "1041657171295",
+  appId: "1:1041657171295:web:9b31cf94fb2692d15abaea",
+  measurementId: "G-8F4DH9YMH6",
 };
 
 firebase.initializeApp(firebaseConfig);
 
-// 파이어 베이스 가져와서 사용
 const apiKey = firebaseConfig.apiKey;
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 const storage = firebase.storage();
-
-
 
 export{auth, apiKey, firestore, storage};

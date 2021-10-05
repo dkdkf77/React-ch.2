@@ -1,67 +1,62 @@
-import React from "react"
-import './App.css';
+import "./App.css";
+import React from "react";
 
-//router 
-import {BrowserRouter, Route} from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
-import {history} from "../redux/configureStore";
+import { history } from "../redux/configureStore";
 
-//component import
 import PostList from "../pages/PostList";
 import Login from "../pages/Login";
-import Header from "../components/Header";
-import {Grid, Button} from "../elements";
 import Signup from "../pages/Signup";
-import Permit from "./permit";
 import PostWrite from "../pages/PostWrite";
 import PostDetail from "../pages/PostDetail";
 import Search from "./Search";
+import Notification from "../pages/Notification";
 
-//리덕스, 파이어 베이스
-import {actionCreators as userActions} from "../redux/modules/user";
-import {useDispatch} from "react-redux";
+import Header from "../components/Header";
+import { Grid, Button } from "../elements";
+import Permit from "./Permit";
+
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
+
 import { apiKey } from "./firebase";
-
-
-//yarn add redux react-redux redux-thunk redux-logger history@4.10.1 connected-react-router@6.8.0
-// 리덕스 관련 새로고침으로 인한 자료 망가짐을 방지하는 패키지
-//yarn add immer redux-actions
-//자동화 해서 편하게 만들어 주는 리덕스 액션
 
 function App() {
   const dispatch = useDispatch();
 
-  const _session_Key = `firebase:authUser:${apiKey}:[DEFAULT]`;
-  const is_session = sessionStorage.getItem(_session_Key)? true: false;
+  const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const is_session = sessionStorage.getItem(_session_key) ? true : false;
 
   React.useEffect(() => {
-    if(is_session) {
-      dispatch(userActions.loginCheckFB);
+    if (is_session) {
+      dispatch(userActions.loginCheckFB());
     }
+  }, []);
 
-  },[]);
   return (
-    //App.js 필요없는 파일 없애고 넣기
-    // shared로 App.css 파일과 App.js 파일 옮기기
-    // 파일 옮기고 나서 index.js 에 App.js 경로 바로 잡기
-
-  
-    //PostList로 라우팅 하기 , exact = 같은 항목 빼기  , component = {PostList}, import 하기
-    //브라우저라우터 -> 커넥티드라우터 그리고 히스토리 주기
     <React.Fragment>
       <Grid>
         <Header></Header>
-        <ConnectedRouter history ={history}> 
-          <Route path ="/" exact component={PostList}/>
-          <Route path ="/login" exact component={Login}/>
-          <Route path = "/signup" exact component={Signup}/>
-          <Route path = "/write" exact component={PostWrite}/>
-          <Route path = "/post/:id" exact component={PostDetail}/>
-          <Route path = "/search" exact component={Search}/> 
+        <ConnectedRouter history={history}>
+          <Route path="/" exact component={PostList} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/write" exact component={PostWrite} />
+          <Route path="/write/:id" exact component={PostWrite} />
+          <Route path="/post/:id" exact component={PostDetail} />
+          <Route path="/search" exact component={Search} />
+          <Route path="/noti" exact component={Notification} />
         </ConnectedRouter>
       </Grid>
       <Permit>
-        <Button is_float text="+" _onClick = {() =>{history.push("/write");}}></Button>
+        <Button
+          is_float
+          text="+"
+          _onClick={() => {
+            history.push("/write");
+          }}
+        ></Button>
       </Permit>
     </React.Fragment>
   );
